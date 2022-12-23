@@ -1,14 +1,31 @@
 using UnityEngine;
 namespace QFramework.Example
 {
-    public class GlobalEvent : MonoBehaviour, IOnEvent<GlobalEvent.GlobalEventB>
+    public struct GlobalEventA
     {
+    }
+    public struct GlobalEventB
+    {
+    }
+
+    public class HandleEventB: IOnEvent<GlobalEventB>
+    {
+        public void OnEvent(GlobalEventB e)
+        {
+            Debug.Log(e.ToString());
+        }
+    }
+    public class GlobalEvent : MonoBehaviour
+    {
+        private HandleEventB _handleEventB = null;
         private void Start()
         {
             //注册方式和注销事件方式1
+            // 1. 注册方式1，手动注册
             QFramework.TypeEventSystem.Global.Register<GlobalEventA>(OnGlobalEventA).CancelOnDestroy(gameObject);
-            // IOnEvent接口注册事件
-            this.Register();
+            // 2. 注册方式2，通过IOnEvent接口注册事件
+            _handleEventB = new HandleEventB();
+            _handleEventB.Register();
         }
         private void Update()
         {
@@ -26,16 +43,8 @@ namespace QFramework.Example
         //     // 注销事件方式2：
         //     QFramework.TypeEventSystem.Global.Cancel<GlobalEventA>(OnGlobalEventA);
                 // 使用IOnEvent接口监听注销事件
-                this.Cancel();
-        }
-        public struct GlobalEventA
-        {
-        }
-        public struct GlobalEventB
-        {
+            _handleEventB.Cancel();
         }
         private void OnGlobalEventA(GlobalEventA obj) { Debug.Log(obj.ToString()); }
-        public void OnEvent(GlobalEventB e) { Debug.Log(e.ToString()); }
-        
     }
 }

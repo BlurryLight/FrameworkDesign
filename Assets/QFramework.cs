@@ -276,8 +276,15 @@ namespace QFramework
         public static void CancelOnDestroy(this ICancel cancel, GameObject go)
         {
             var trigger = go.GetComponent<CancelOnDestroyTrigger>();
-            if (!trigger) go.AddComponent<CancelOnDestroyTrigger>();
-            else trigger.AddCancel(cancel);
+            // panda:
+            // 主线上似乎已经改成UnregisterWhenGameObjectDestroyed了, 不知道这个代码还是哪个上古版本的。。
+            // https://github.com/liangxiegame/QFramework/blob/04f9c409e627533e981cbe6a0cca182d5b14a90e/QFramework.cs#L580
+            // 原始实现里这里是有Bug的，稍微处理了下。
+            if (!trigger)
+            {
+                trigger = go.AddComponent<CancelOnDestroyTrigger>();
+            }
+            trigger.AddCancel(cancel);
         }
     }
     public class TypeEventSystem : ITypeEventSystem
