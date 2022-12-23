@@ -23,7 +23,7 @@ namespace QFramework.Example
             var storage = this.GetUtility<IStorage>();
             BestScore.Value = storage.LoadInt(nameof(BestScore));
             BestScore.Register(bestScore => storage.SaveInt(nameof(BestScore), bestScore));
-            BestScore.Register(lift => storage.SaveInt(nameof(Life), lift));
+            BestScore.Register(life => storage.SaveInt(nameof(Life), life));
             BestScore.Register(gold => storage.SaveInt(nameof(Gold), gold));
         }
     }

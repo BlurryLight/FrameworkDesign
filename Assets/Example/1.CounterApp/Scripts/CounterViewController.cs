@@ -46,7 +46,7 @@ namespace CounterApp
         {
             var storage = this.GetUtility<IStorage>();
             Count.Value = storage.LoadInt("COUNTER_COUNT");
-            Count.Register(count => storage.SaveInt("COUNT_COUNT", count));
+            Count.Register(count => storage.SaveInt("COUNTER_COUNT", count));
         }
     }
 }

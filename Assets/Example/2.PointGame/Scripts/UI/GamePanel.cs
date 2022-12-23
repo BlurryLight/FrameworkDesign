@@ -30,9 +30,9 @@ namespace QFramework.Example
         }
         private void OnDestroy()
         {
-            mGameModel.Gold.Register(OnGoldValueChanged);
-            mGameModel.Life.Register(OnLifeValueChanged);
-            mGameModel.Score.Register(OnScoreValueChanged);
+            mGameModel.Gold.Cancel(OnGoldValueChanged);
+            mGameModel.Life.Cancel(OnLifeValueChanged);
+            mGameModel.Score.Cancel(OnScoreValueChanged);
             mGameModel = null;
             mCountDownSystem = null;
         }

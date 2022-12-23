@@ -9,6 +9,7 @@ namespace QFramework.Example
             RegisterSystem<IScoreSystem>(new ScoreSystem());
             RegisterModel<IGameModel>(new GameModel());
             RegisterUtility<IStorage>(new PlayerPrefsStorage());
+            RegisterUtility<IRandomUtil>(new IRandomUtil());
         }
     }
 }
