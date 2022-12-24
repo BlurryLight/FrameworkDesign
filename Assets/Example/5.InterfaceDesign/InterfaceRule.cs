@@ -1,6 +1,8 @@
 using UnityEngine;
 namespace QFramework.Example
 {
+    // 展示了如何通过语法糖，限制某个接口只能访问上层接口的部分实现
+    // 用处并不大。。很少有实现都写在某个基类里
     public class CanDoEverything
     {
         public void DoSomething1() { Debug.Log("DoSomething1"); }

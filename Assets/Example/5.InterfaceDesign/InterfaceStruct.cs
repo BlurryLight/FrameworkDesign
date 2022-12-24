@@ -3,6 +3,7 @@ namespace QFramework.Example
 {
     public class InterfaceStruct : MonoBehaviour
     {
+        // 展示了如何在实现类隐藏接口(显式实现某个接口必须显式调用)
         public interface ICustomScript
         {
             void Start();
